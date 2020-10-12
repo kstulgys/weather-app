@@ -9,25 +9,42 @@ import {
 } from "@chakra-ui/core";
 import { FiSearch } from "react-icons/fi";
 import Head from "next/head";
+import create from 'zustand'
+import axios from "axios";
+
+const useStore = create((set, get) => ({
+  data: undefined,
+  getTemperatureData: async () => {
+    const { data } = await axios.get('https://api.openweathermap.org/data/2.5/weather?q=vilnius&appid=d3b219ab4ac3dde97f442a50f5d3c607')
+    console.log({ data })
+    set({ data })
+  }
+}))
+
 
 function IndexPage() {
+  const { getTemperatureData } = useStore()
+  React.useEffect(() => {
+    getTemperatureData()
+  }, [])
+
   return (
     <Layout>
       <AppFrame>
-        <VideoBackground>
-          <Stack p="10" flex="1">
-            <SearchInput />
-            <Content />
-          </Stack>
-          <Box width="25vw" display={["none", "none", "block"]} />
-        </VideoBackground>
+        <VideoBackground />
+        <Stack p="10" zIndex={10} mr='25vw' height='full'>
+          <SearchInput />
+          <Content />
+        </Stack>
         <Aside />
       </AppFrame>
-    </Layout>
+    </Layout >
   );
 }
 
 export default IndexPage;
+
+
 
 function Layout({ children }) {
   return (
@@ -51,26 +68,47 @@ function Layout({ children }) {
   );
 }
 
-function Content(props) {
+function Content() {
+  const { data } = useStore()
+  if (!data) return null
+  const currentDate = new Date()
   return (
     <Stack height="full">
-      <Box mt="auto" width="full">
-        <Text fontSize="6xl">14</Text>
-      </Box>
+      <Stack mt='auto' fontWeight='medium'>
+        <Box>
+          <Text lineHeight='none' fontSize="200px">{(data.main.temp - 273.15).toFixed(0)}</Text>
+        </Box>
+        <Stack isInline justifyContent='space-between'>
+          <Box>
+            <Text lineHeight='none' fontSize="2xl">{currentDate.toISOString()}</Text>
+          </Box>
+          <Box alignSelf='flex-end'>
+            <Text lineHeight='none' fontSize="2xl">{data.name}</Text>
+          </Box>
+        </Stack>
+      </Stack>
     </Stack>
   );
 }
 
 function SearchInput(props) {
+  const { data } = useStore()
+  if (!data) return null
+
   return (
     <Box ml="auto">
-      <InputGroup color="white">
+      <InputGroup color="gray.900">
         <Input
+          fontWeight='semibold'
+          defaultValue={data.name}
           rounded="none"
-          placeholder="Search city..."
+          // placeholder="Search city..."
           border="none"
-          borderBottom="1px solid"
+          borderBottom="2px solid"
           height="45px"
+          _hover={{
+            borderColor: 'gray.900'
+          }}
         />
         <InputRightElement children={<Icon as={FiSearch} fontSize="30px" />} />
       </InputGroup>
@@ -78,26 +116,24 @@ function SearchInput(props) {
   );
 }
 
-function VideoBackground({ children, src = "" }) {
+function VideoBackground({ children, src = "/bg_videos/video.mp4" }) {
   return (
-    <Stack
+    <Box
       as="video"
       autoPlay
       muted
       loop
-      id="myVideo"
-      flexDir={["column", "column", "row"]}
-      spacing={0}
       position={["static", "static", "absolute"]}
       top="0"
       left="0"
       width="full"
       height={["60vh", "60vh", "full"]}
       mb={["-35px", "-35px", 0]}
+      objectFit='cover'
     >
       <source src={src} type="video/mp4" />
       {children}
-    </Stack>
+    </Box>
   );
 }
 
@@ -141,3 +177,12 @@ function Aside() {
     </Stack>
   );
 }
+
+
+// const [src, setSrc] = React.useState(null)
+// const [searchTerm, setSearchTerm] = React.useState('')
+
+// React.useEffect(() => {
+//   const query = 'thunderstorm with light rain'
+//   axios.get('https://api.openweathermap.org/data/2.5/weather?q=vilnius&appid=d3b219ab4ac3dde97f442a50f5d3c607').then(console.log)
+// }, [])
