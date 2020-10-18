@@ -22,16 +22,16 @@ This is a quick showcase demo project for potential employee
 ## Setting up development environment 🛠
 
 - `git clone https://github.com/kstulgys/weather-app`
-- In `env.production.local` and `env.development.local` add your [openweathermap](https://openweathermap.org/) api key API key.
+- In `env.production.local` and `env.development.local` add your [openweathermap](https://openweathermap.org/) API key.
 - `npm i` or `yarn`
 - `npm run dev` or `yarn dev`
 - App should now be running on `http://localhost:3000/`
 
 ## What's currently missing?
 
-[] unit testing (jest)
-[] end-to-end testing (cypress)
-[] CI/CD (github actions)
+* [ ] unit testing (jest)
+* [ ] end-to-end testing (cypress)
+* [ ] CI/CD (github actions)
 
 ## Author: Ivor Reic ✍️
 
