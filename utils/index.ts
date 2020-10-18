@@ -41,17 +41,15 @@ export async function getLocation(): Promise<{ lon: number; lat: number }> {
   return new Promise((res, rej) => {
     if (!navigator?.geolocation) rej('Geolocation is not supported by your browser')
 
-    navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-      if (result.state == 'granted') {
-        navigator.geolocation.getCurrentPosition((position) => {
-          res({
-            lon: position.coords.longitude,
-            lat: position.coords.latitude,
-          })
+    navigator.permissions.query({ name: 'geolocation' }).then(({ state }) => {
+      if (state == 'denied') return rej('Can not get coordinates')
+
+      navigator.geolocation.getCurrentPosition((position) => {
+        res({
+          lon: position.coords.longitude,
+          lat: position.coords.latitude,
         })
-      } else {
-        rej('Can not get coordinates')
-      }
+      })
     })
   })
 }
