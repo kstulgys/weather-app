@@ -1,19 +1,19 @@
-import { ResposeSuccess, ResponseError } from '../api'
+import { ResponseSuccess, ResponseError } from '../api'
 import { ForecastItem } from '../shared/hooks/useWeatherStore'
 
 export function getCelcius(kelvin: number): number {
   return Math.round(kelvin - 273.15)
 }
 
-export function isError(data: ResponseError | ResposeSuccess): data is ResponseError {
+export function isError(data: ResponseError | ResponseSuccess): data is ResponseError {
   if ((data as ResponseError).error) {
     return true
   }
   return false
 }
 
-export function isSuccess(data: ResponseError | ResposeSuccess): data is ResposeSuccess {
-  if ((data as ResposeSuccess).cityName && (data as ResposeSuccess).forecast) {
+export function isSuccess(data: ResponseError | ResponseSuccess): data is ResponseSuccess {
+  if ((data as ResponseSuccess).cityName && (data as ResponseSuccess).forecast) {
     return true
   }
   return false
@@ -39,12 +39,19 @@ export function getErrorMessage(error: ErrorProp): string {
 
 export async function getLocation(): Promise<{ lon: number; lat: number }> {
   return new Promise((res, rej) => {
-    if (!navigator.geolocation) rej('navigator is not supported')
-    navigator.geolocation.getCurrentPosition((position) => {
-      res({
-        lon: position.coords.longitude,
-        lat: position.coords.latitude,
-      })
+    if (!navigator?.geolocation) rej('Geolocation is not supported by your browser')
+
+    navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+      if (result.state == 'granted') {
+        navigator.geolocation.getCurrentPosition((position) => {
+          res({
+            lon: position.coords.longitude,
+            lat: position.coords.latitude,
+          })
+        })
+      } else {
+        rej('Can not get coordinates')
+      }
     })
   })
 }

@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/core'
 import Head from 'next/head'
 import { FiSearch } from 'react-icons/fi'
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Label } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { getCelcius } from '../utils'
 import { useWeatherStore, ForecastItem } from '../shared/hooks/useWeatherStore'
 
