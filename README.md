@@ -33,7 +33,7 @@ This is a quick showcase demo project for potential employer
 * [ ] end-to-end testing (cypress)
 * [ ] CI/CD (github actions)
 
-## Author: Ivor Reic ✍️
+## Author: Karolis Stulgys ✍️
 
 - Website: https://imkarolis.dev/
 
