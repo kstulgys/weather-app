@@ -7,6 +7,7 @@
 </h3>
 
 ![App screenshot](https://ibb.co/Fz4S6cm)
+<a href="https://ibb.co/Fz4S6cm"><img src="https://i.ibb.co/7KtwvBj/Screenshot-2020-10-18-at-22-09-39.png" alt="Screenshot-2020-10-18-at-22-09-39" border="0" /></a>
 
 ## What is this and who is it for 🤷‍♀️
 
