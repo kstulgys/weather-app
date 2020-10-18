@@ -1,21 +1,52 @@
-# Hello World example
+<h1 align="center">A simple weather app built with Nextjs</h1>
 
-This example shows the most basic idea behind Next. We have 2 pages: `pages/index.js` and `pages/about.js`. The former responds to `/` requests and the latter to `/about`. Using `next/link` you can add hyperlinks between them with universal routing capabilities. The `day` directory shows that you can have subdirectories.
+<div align="center">Auto formatted with Prettier</div>
 
-## Deploy your own
+<h3 align="center">
+  <a href="https://weather-app-coral-alpha.vercel.app/">Visit the live app</a>
+</h3>
 
-Deploy the example using [Vercel](https://vercel.com):
+![App screenshot](https://ibb.co/Fz4S6cm)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/next.js/tree/canary/examples/hello-world)
+## What is this and who is it for 🤷‍♀️
 
-## How to use
+This is a quick showcase demo project for potential employee
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+## Features
 
-```bash
-npx create-next-app --example hello-world hello-world-app
-# or
-yarn create next-app --example hello-world hello-world-app
-```
+- Used modern technologies (Nextjs, Typescript, Eslint, CSSinJS)
+- Proven, scalable, and easy to understand project structure
+- Written in modern React, only functional components with hooks
+- Simple local React state management, without redux, mobx or similar
 
-Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Setting up development environment 🛠
+
+- `git clone https://github.com/kstulgys/weather-app`
+- In `env.production.local` and `env.development.local` add your [openweathermap](https://openweathermap.org/) api key API key.
+- `npm i` or `yarn`
+- `npm run dev` or `yarn dev`
+- App should now be running on `http://localhost:3000/`
+
+## What's currently missing?
+
+[] unit testing (jest)
+[] end-to-end testing (cypress)
+[] CI/CD (github actions)
+
+## Author: Ivor Reic ✍️
+
+- Website: https://imkarolis.dev/
+
+## Contributing
+
+I will not be accepting PR's on this repository. Feel free to fork and maintain your own version.
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
+
+<hr>
+
+<h3>
+  <a href="https://weather-app-coral-alpha.vercel.app/">Visit the live app</a>
+</h3>
