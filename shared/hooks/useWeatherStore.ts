@@ -29,19 +29,31 @@ export const useWeatherStore = create<State>((set) => ({
   error: '',
   // actions
   getWeather: async (query) => {
-    const response = await fetchWeather(query).finally(() => set({ isLoading: false }))
-    const { forecast, cityName } = response as ResponseSuccess
-    const { error } = response as ResponseError
+    try {
+      const response = await fetchWeather(query)
+      const { forecast, cityName } = response as ResponseSuccess
+      const { error } = response as ResponseError
 
-    if (isError(response)) return set({ error })
-    if (isSuccess(response)) return set({ forecast, cityName, error: '' })
+      if (isError(response)) return set({ error })
+      if (isSuccess(response)) return set({ forecast, cityName, error: '' })
+    } catch (error) {
+      set({ error: 'Something went wrong' })
+    } finally {
+      set({ isLoading: false })
+    }
   },
   getInitialWeather: async () => {
-    const response = await fetchInitialWeather().finally(() => set({ isLoading: false }))
-    const { forecast, cityName } = response as ResponseSuccess
-    const { error } = response as ResponseError
+    try {
+      const response = await fetchInitialWeather()
+      const { forecast, cityName } = response as ResponseSuccess
+      const { error } = response as ResponseError
 
-    if (isError(response)) return set({ error })
-    if (isSuccess(response)) return set({ forecast, cityName, error: '' })
+      if (isError(response)) return set({ error })
+      if (isSuccess(response)) return set({ forecast, cityName, error: '' })
+    } catch (error) {
+      set({ error: 'Something went wrong' })
+    } finally {
+      set({ isLoading: false })
+    }
   },
 }))
