@@ -10,7 +10,7 @@
 
 ## What is this and who is it for 🤷‍♀️
 
-This is a quick showcase demo project for potential employer
+This is a quick showcase demo project
 
 ## Features
 
