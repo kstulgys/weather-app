@@ -11,7 +11,7 @@ import {
   Spinner,
   ErrorBoundary,
   SomethingWentWrong,
-} from '../components'
+} from 'components'
 
 function IndexPage(): JSX.Element {
   const { getInitialWeather, isLoading } = useWeatherStore()

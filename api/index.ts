@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { ForecastItem } from './../shared/hooks/useWeatherStore'
-import { formatData, getErrorMessage, getLocation } from '../utils'
+import { ForecastItem } from 'shared/hooks/useWeatherStore'
+import { formatData, getErrorMessage, getLocation } from 'utils'
 
 const BASE_URL = `https://api.openweathermap.org/data/2.5`
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY

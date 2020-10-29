@@ -1,5 +1,5 @@
-import { ResponseSuccess, ResponseError } from '../api'
-import { ForecastItem } from '../shared/hooks/useWeatherStore'
+import { ResponseSuccess, ResponseError } from 'api'
+import { ForecastItem } from 'shared/hooks/useWeatherStore'
 
 export function getCelcius(kelvin: number): number {
   return Math.round(kelvin - 273.15)
@@ -40,16 +40,16 @@ export function getErrorMessage(error: ErrorProp): string {
 export async function getLocation(): Promise<{ lon: number; lat: number }> {
   return new Promise((res, rej) => {
     if (!navigator?.geolocation) rej('Geolocation is not supported by your browser')
-
     navigator.permissions.query({ name: 'geolocation' }).then(({ state }) => {
-      if (state == 'denied') return rej('Can not get coordinates')
-
-      navigator.geolocation.getCurrentPosition((position) => {
-        res({
-          lon: position.coords.longitude,
-          lat: position.coords.latitude,
+      if (state === 'granted') {
+        return navigator.geolocation.getCurrentPosition((position) => {
+          res({
+            lon: position.coords.longitude,
+            lat: position.coords.latitude,
+          })
         })
-      })
+      }
+      return rej('Can not get coordinates')
     })
   })
 }
